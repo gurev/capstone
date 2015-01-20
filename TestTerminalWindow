@@ -1,0 +1,99 @@
+/ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+import com.googlecode.lanterna.TerminalFacade;
+import com.googlecode.lanterna.gui.Action;
+import com.googlecode.lanterna.gui.Component.Alignment;
+import com.googlecode.lanterna.gui.GUIScreen;
+import com.googlecode.lanterna.gui.Window;
+import com.googlecode.lanterna.gui.component.Button;
+import com.googlecode.lanterna.gui.component.EmptySpace;
+import com.googlecode.lanterna.gui.component.Label;
+import com.googlecode.lanterna.gui.component.Panel;
+import com.googlecode.lanterna.gui.component.Panel.Orientation;
+import com.googlecode.lanterna.gui.component.Table;
+import com.googlecode.lanterna.gui.layout.LinearLayout;
+import com.googlecode.lanterna.gui.layout.VerticalLayout;
+import com.googlecode.lanterna.terminal.TerminalSize;
+import com.googlecode.lanterna.gui.Component;
+import com.googlecode.lanterna.gui.component.TextArea;
+import com.googlecode.lanterna.gui.component.TextBox;
+import com.googlecode.lanterna.terminal.Terminal;
+
+
+public class Capstone {
+    public static void main(String[] args) throws InterruptedException {
+        final char cSymbol='#';
+        Terminal myTerminal=TerminalFacade.createSwingTerminal();
+        //GUIScreen guiScreen = TerminalFacade.createGUIScreen(myTerminal);
+        
+        /*************/
+        myTerminal.moveCursor(10, 15);
+        myTerminal.putCharacter(cSymbol);
+        myTerminal.flush();
+        //Thread.sleep(5000);
+        /*************/
+        
+        Window window = new Window("Menu");
+        //window.setWindowSizeOverride(new TerminalSize(130,50));
+        window.setSoloWindow(true);
+        
+        Panel panelMain = new Panel(Orientation.HORISONTAL); 
+        Panel panelKommanden = new Panel("Kommanden", Orientation.VERTICAL);
+        
+        Button startBtn = new Button("Neues Spiel", new Action() {
+            @Override
+            public void doAction() {                
+                //TO DO
+            }
+        });          
+        Button stopBtn = new Button("Spiel beenden", new Action() {
+            @Override
+            public void doAction() {                
+                //TO DO
+            }
+        });        
+        Button saveBtn = new Button("Spiel speichern", new Action() {
+            @Override
+            public void doAction() {                
+                //TO DO
+            }
+        });  
+        Button loadBtn = new Button("Spiel loaden", new Action() {
+            @Override
+            public void doAction() {                
+                //TO DO
+            }
+        });          
+        
+        panelKommanden.addComponent(startBtn);
+        panelKommanden.addComponent(loadBtn);
+        panelKommanden.addComponent(saveBtn);
+        panelKommanden.addComponent(stopBtn);        
+        
+        Panel panelLegenda = new Panel("Legenda", Orientation.VERTICAL);
+        Label label =new Label ("gghghz\njhjjhhghhg\nhjhjefghghhghghh");
+        panelLegenda.addComponent(label);
+        
+        panelMain.addComponent(panelKommanden, LinearLayout.GROWS_VERTICALLY);
+        panelMain.addComponent(panelLegenda, LinearLayout.GROWS_VERTICALLY);
+        window.addComponent(panelMain);
+        
+        Button quitButton = new Button("Menü schliessen", new Action() {
+            @Override
+            public void doAction() {                
+                window.close();
+            }
+        });
+        
+        quitButton.setAlignment(Component.Alignment.CENTER);
+        window.addComponent(quitButton);
+        
+        guiScreen.getScreen().startScreen();
+        guiScreen.showWindow(window);
+        //Thread.sleep(5000);
+        guiScreen.getScreen().stopScreen();
+    
+    }
+}
